@@ -88,8 +88,9 @@ public class DepartmentListController implements Initializable{
 			FXMLLoader loader = new FXMLLoader(getClass().getResource(absoluteName));
 			Pane pane = loader.load();
 			
-			// aqui estamos chamandon o controller da classe 'DepartmentFormController', injetando o departamento e carregando seus dados no formulário
+			// aqui estamos chamando o controller da classe 'DepartmentFormController', injetando o departamento e carregando seus dados no formulário
 			DepartmentFormController controller = loader.getController();
+			controller.setDepartmentService(new DepartmentServices());
 			controller.setDepartment(obj);
 			controller.updateFormDate();
 			
