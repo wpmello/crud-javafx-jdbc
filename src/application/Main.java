@@ -12,7 +12,7 @@ public class Main extends Application {
 	
 	private static Scene mainScene;
 	
-	// method to start main view 
+	// método para começar a main view 
 	
 	@Override
 	public void start(Stage primaryStage) {
@@ -20,7 +20,7 @@ public class Main extends Application {
 			FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/MainView.fxml"));
 			ScrollPane scrollPane= loader.load();
 
-			// method to fit controls 'MenuBar' with 'ScrollPane'.
+			// método para ajusatr o 'MenuBar' ao 'ScrollPane'.
 			scrollPane.setFitToHeight(true);  
 			scrollPane.setFitToWidth(true);
 			

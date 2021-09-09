@@ -4,7 +4,7 @@ import javafx.scene.control.TextField;
 
 public class Constraints {
 
-	// method created to constraints the 'TexteFieldsd'
+	// método criado para restringir o 'TexteFieldsd'
 	
 	public static void setTextFieldInteger(TextField txt) {
 		txt.textProperty().addListener((obs, oldValue, newValue) -> {

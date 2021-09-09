@@ -15,6 +15,7 @@ import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.VBox;
+import model.services.DepartmentServices;
 
 public class MainViewController implements Initializable {
 
@@ -34,7 +35,7 @@ public class MainViewController implements Initializable {
 	
 	@FXML
 	public void onMenuItemDepartmentAction() {
-		loadView("/gui/DepartmentList.fxml");	}
+		loadView2("/gui/DepartmentList.fxml");	}
 	
 	@FXML
 	public void onMenuItemAboutAction() {
@@ -48,21 +49,48 @@ public class MainViewController implements Initializable {
 
 	private synchronized void loadView(String absoluteName) {
 		
-		// method used to load a new view
+		// método usado para carregar nova tela sobre a principal
 		
 		try {
 			FXMLLoader loader = new FXMLLoader(getClass().getResource(absoluteName));
 			VBox newVBox = loader.load();			
 			
 			Scene mainScene = Main.getMainScene();
-			VBox mainVBox = (VBox) ((ScrollPane) mainScene.getRoot()).getContent(); // catching and guarding the control 'VBox' from main Scene
-			
-			Node mainMenu = mainVBox.getChildren().get(0); 							// catching and guarding 'MenuBar'
-			mainVBox.getChildren().clear();    										// its cleaning the 'MenuBar'
-			mainVBox.getChildren().add(mainMenu);									// adding the 'MenuBar' by mainMenu
-			mainVBox.getChildren().addAll(newVBox);									// adding the new 'MenuBar' by newVBox
+			VBox mainVBox = (VBox) ((ScrollPane) mainScene.getRoot()).getContent(); // pegando e guardando o control 'VBox' da Scene principal' 
+			Node mainMenu = mainVBox.getChildren().get(0); 	// pegando e guardando 'MenuBar'
+			mainVBox.getChildren().clear();  // limpando 'MenuBar'
+			mainVBox.getChildren().add(mainMenu);	// adc o 'MenuBar' pela mainMenu
+			mainVBox.getChildren().addAll(newVBox);	// adc o novo 'MenuBar' pela newVBox
 		
-			// "synchronized" helps method with multi threads
+			// "synchronized" ajuda o método com multi threads, fazendo com q ele rode independente das threads q estão rolando
+		}
+		catch(IOException e) {
+			Alerts.showAlert("IO Exception", "Error loading view", e.getMessage(), AlertType.ERROR);
+		}
+	}
+	
+	private synchronized void loadView2(String absoluteName) {
+	
+		// foi feito uma cópia apenas a critério da aula. será arrumado no proximo commit
+		
+		// método usado para carregar nova tela sobre a principal
+		
+		try {
+			FXMLLoader loader = new FXMLLoader(getClass().getResource(absoluteName));
+			VBox newVBox = loader.load();			
+			
+			Scene mainScene = Main.getMainScene();
+			VBox mainVBox = (VBox) ((ScrollPane) mainScene.getRoot()).getContent(); // pegando e guardando o control 'VBox' da Scene principal' 
+			Node mainMenu = mainVBox.getChildren().get(0); 	// pegando e guardando 'MenuBar'
+			mainVBox.getChildren().clear();  // limpando 'MenuBar'
+			mainVBox.getChildren().add(mainMenu);	// adc o 'MenuBar' pela mainMenu
+			mainVBox.getChildren().addAll(newVBox);	// adc o novo 'MenuBar' pela newVBox
+		
+			// "synchronized" ajuda o método com multi threads, fazendo com q ele rode independente das threads q estão rolando
+		
+			DepartmentListController controller = loader.getController(); // acessa controller da classe
+			controller.setDepartmentService(new DepartmentServices());
+			controller.updateTableView();
 		}
 		catch(IOException e) {
 			Alerts.showAlert("IO Exception", "Error loading view", e.getMessage(), AlertType.ERROR);

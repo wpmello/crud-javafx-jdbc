@@ -5,8 +5,7 @@ import javafx.scene.control.Alert.AlertType;
 
 public class Alerts {
 
-	// default alerts to use during the creation of the project
-
+	// alertas padrão para usar durante a criação do projeto
 	public static void showAlert(String title, String header, String content, AlertType type) {
 		Alert alert = new Alert(type);
 		alert.setTitle(title);
