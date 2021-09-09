@@ -8,7 +8,7 @@ public class Department implements Serializable {
 
 	private Integer id;
 	private String name;
-	
+
 	public Department() {
 	}
 
@@ -33,6 +33,7 @@ public class Department implements Serializable {
 		this.name = name;
 	}
 
+	// ======== hashCode by 'id' ======== 
 	@Override
 	public int hashCode() {
 		final int prime = 31;
