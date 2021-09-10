@@ -31,6 +31,7 @@ import javafx.scene.layout.Pane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import model.entities.Seller;
+import model.services.DepartmentServices;
 import model.services.SellerServices;
 
 public class SellerListController implements Initializable, DataChangeListener {
@@ -121,8 +122,9 @@ public class SellerListController implements Initializable, DataChangeListener {
 			// aqui estamos chamando o controller da classe 'SellerFormController',
 			// injetando o departamento e carregando seus dados no formulário
 			SellerFormController controller = loader.getController();
-			controller.setSellerService(new SellerServices());
 			controller.setSeller(obj);
+			controller.setServices(new SellerServices(), new DepartmentServices());
+			controller.loadAssociatedObjectes();
 			controller.subscribeDataChengeListener(this); // aqui é a tranformação da classe em um listener
 			controller.updateFormDate();
 
