@@ -30,6 +30,16 @@ public class Utils {
 			return null;
 		}
 	}
+	
+	// método q tenta transformar um dado num tipo "Double" se não conseguir,
+		// retorna "null"
+		public static Double tryParseToDouble(String str) {
+			try {
+				return Double.parseDouble(str);
+			} catch (NumberFormatException e) {
+				return null;
+			}
+		}
 
 	// método que formata o tableColumnDate
 
