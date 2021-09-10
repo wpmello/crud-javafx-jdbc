@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.ResourceBundle;
 
 import application.Main;
+import gui.listeners.DataChangeListener;
 import gui.util.Alerts;
 import gui.util.Utils;
 import javafx.collections.FXCollections;
@@ -26,7 +27,7 @@ import javafx.stage.Stage;
 import model.entities.Department;
 import model.services.DepartmentServices;
 
-public class DepartmentListController implements Initializable{
+public class DepartmentListController implements Initializable, DataChangeListener {
 
 	private DepartmentServices service;
 	
@@ -92,6 +93,7 @@ public class DepartmentListController implements Initializable{
 			DepartmentFormController controller = loader.getController();
 			controller.setDepartmentService(new DepartmentServices());
 			controller.setDepartment(obj);
+			controller.subscribeDataChengeListener(this); // aqui é a tranformação da classe em um listener
 			controller.updateFormDate();
 			
 			Stage dialogForm = new Stage();
@@ -105,5 +107,11 @@ public class DepartmentListController implements Initializable{
 		catch(IOException e) {
 		Alerts.showAlert("IO Exception", "Error loading view", e.getMessage(), AlertType.ERROR);
 		}
+	}
+
+	@Override
+	public void onDataChanged() {
+		// aqui é oq irá acontecer quando a classe ouvir o "som"
+		updateTableView();
 	}
 }
