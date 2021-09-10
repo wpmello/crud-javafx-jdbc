@@ -1,5 +1,6 @@
 package gui;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.Date;
 import java.util.List;
@@ -16,7 +17,9 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Scene;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
@@ -24,6 +27,8 @@ import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.layout.Pane;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 import model.entities.Seller;
 import model.services.SellerServices;
@@ -109,29 +114,29 @@ public class SellerListController implements Initializable, DataChangeListener {
 		// método carregando um novo Stage (formulário para preencher os dados de um
 		// novo departmento)
 
-//		try {
-//			FXMLLoader loader = new FXMLLoader(getClass().getResource(absoluteName));
-//			Pane pane = loader.load();
-//
-//			// aqui estamos chamando o controller da classe 'SellerFormController',
-//			// injetando o departamento e carregando seus dados no formulário
-//			SellerFormController controller = loader.getController();
-//			controller.setSellerService(new SellerServices());
-//			controller.setSeller(obj);
-//			controller.subscribeDataChengeListener(this); // aqui é a tranformação da classe em um listener
-//			controller.updateFormDate();
-//
-//			Stage dialogForm = new Stage();
-//			dialogForm.setTitle("Enter Seller data");
-//			dialogForm.setScene(new Scene(pane));
-//			dialogForm.setResizable(false); // função para tela n redimensionar
-//			dialogForm.initOwner(parentStage); // indica o Stage em q a nova tela vai abrir
-//			dialogForm.initModality(Modality.WINDOW_MODAL); // ao essa tela ser aberta só será possível acessar outra
-//															// fechando-a no 'x'
-//			dialogForm.showAndWait(); // enfim carrega a tela
-//		} catch (IOException e) {
-//			Alerts.showAlert("IO Exception", "Error loading view", e.getMessage(), AlertType.ERROR);
-//		}
+		try {
+			FXMLLoader loader = new FXMLLoader(getClass().getResource(absoluteName));
+			Pane pane = loader.load();
+
+			// aqui estamos chamando o controller da classe 'SellerFormController',
+			// injetando o departamento e carregando seus dados no formulário
+			SellerFormController controller = loader.getController();
+			controller.setSellerService(new SellerServices());
+			controller.setSeller(obj);
+			controller.subscribeDataChengeListener(this); // aqui é a tranformação da classe em um listener
+			controller.updateFormDate();
+
+			Stage dialogForm = new Stage();
+			dialogForm.setTitle("Enter Seller data");
+			dialogForm.setScene(new Scene(pane));
+			dialogForm.setResizable(false); // função para tela n redimensionar
+			dialogForm.initOwner(parentStage); // indica o Stage em q a nova tela vai abrir
+			dialogForm.initModality(Modality.WINDOW_MODAL); // ao essa tela ser aberta só será possível acessar outra
+															// fechando-a no 'x'
+			dialogForm.showAndWait(); // enfim carrega a tela
+		} catch (IOException e) {
+			Alerts.showAlert("IO Exception", "Error loading view", e.getMessage(), AlertType.ERROR);
+		}
 	}
 
 	@Override
