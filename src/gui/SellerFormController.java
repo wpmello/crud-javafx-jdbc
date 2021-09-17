@@ -94,7 +94,7 @@ public class SellerFormController implements Initializable {
 		this.departmentSerive = departmentService;
 	}
 
-	public void subscribeDataChengeListener(DataChangeListener listeners) {
+	public void subscribeDataChangeListener(DataChangeListener listeners) {
 		// aqui é onde vamos guardar nossos "sons"
 		// esse método chamado em outra classe como função transforma a classe em um
 		// listener ou seja
@@ -112,9 +112,9 @@ public class SellerFormController implements Initializable {
 			throw new IllegalStateException("Service was null"); // programação defensiva
 		}
 		try {
-			entity = getFormDate();
+			entity = getFormData();
 			service.saveOrUpdate(entity);
-			notifyDataChengeListeners(); // método q emite o "som"
+			notifyDataChangeListeners(); // método q emite o "som"
 			Utils.currentStage(event).close();
 		} catch (ValidationException e) {
 			setErrorMessages(e.getError());
@@ -124,7 +124,7 @@ public class SellerFormController implements Initializable {
 
 	}
 
-	private void notifyDataChengeListeners() {
+	private void notifyDataChangeListeners() {
 
 		// dentro do for está sendo executado o método da interface e é aqui
 		// onde o "som" será emitido
@@ -134,7 +134,7 @@ public class SellerFormController implements Initializable {
 		}
 	}
 
-	private Seller getFormDate() {
+	private Seller getFormData() {
 		Seller obj = new Seller();
 
 		ValidationException exception = new ValidationException("Validation error");
@@ -193,7 +193,7 @@ public class SellerFormController implements Initializable {
 		initializeComboBoxDepartment();
 	}
 
-	public void updateFormDate() {
+	public void updateFormData() {
 		if (entity == null) {
 			throw new IllegalStateException("Entity was null");
 		}
@@ -215,7 +215,7 @@ public class SellerFormController implements Initializable {
 		}
 	}
 
-	public void loadAssociatedObjectes() {
+	public void loadAssociatedObjects() {
 		if (departmentSerive == null) {
 			throw new IllegalStateException("DepartmentService was null");
 		}

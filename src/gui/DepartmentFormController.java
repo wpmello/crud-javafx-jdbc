@@ -54,7 +54,7 @@ public class DepartmentFormController implements Initializable {
 		this.service = service;
 	}
 	
-	public void subscribeDataChengeListener(DataChangeListener listeners) {
+	public void subscribeDataChangeListener(DataChangeListener listeners) {
 		// aqui é onde vamos guardar nossos "sons"
 		// esse método chamado em outra classe como função transforma a classe em um listener ou seja
 		// a classe agora consegue ouvir o "som" q outra(s) emite/emitem
@@ -71,9 +71,9 @@ public class DepartmentFormController implements Initializable {
 			throw new IllegalStateException("Service was null"); // programação defensiva
 		}
 		try {
-			entity = getFormDate();	
+			entity = getFormData();	
 			service.saveOrUpdate(entity);
-			notifyDataChengeListeners(); // método q emite o "som"
+			notifyDataChangeListeners(); // método q emite o "som"
 			Utils.currentStage(event).close();
 		}
 		catch (ValidationException e) {
@@ -85,7 +85,7 @@ public class DepartmentFormController implements Initializable {
 		
 	}
 	
-	private void notifyDataChengeListeners() {
+	private void notifyDataChangeListeners() {
 		
 		// dentro do for está sendo executado o método da interface e é aqui 
 		// onde o "som" será emitido
@@ -95,7 +95,7 @@ public class DepartmentFormController implements Initializable {
 		}
 	}
 
-	private Department getFormDate() {
+	private Department getFormData() {
 		Department obj = new Department();
 		
 		ValidationException exception = new ValidationException("Validation error");
@@ -116,7 +116,6 @@ public class DepartmentFormController implements Initializable {
 
 	@FXML
 	public void onBtCancelAction(ActionEvent event) {
-		service.saveOrUpdate(entity);
 		Utils.currentStage(event).close();
 	}
 	

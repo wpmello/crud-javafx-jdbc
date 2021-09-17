@@ -124,9 +124,9 @@ public class SellerListController implements Initializable, DataChangeListener {
 			SellerFormController controller = loader.getController();
 			controller.setSeller(obj);
 			controller.setServices(new SellerServices(), new DepartmentServices());
-			controller.loadAssociatedObjectes();
-			controller.subscribeDataChengeListener(this); // aqui é a tranformação da classe em um listener
-			controller.updateFormDate();
+			controller.loadAssociatedObjects();
+			controller.subscribeDataChangeListener(this); // aqui é a tranformação da classe em um listener
+			controller.updateFormData();
 
 			Stage dialogForm = new Stage();
 			dialogForm.setTitle("Enter Seller data");

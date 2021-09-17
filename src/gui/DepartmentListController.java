@@ -90,8 +90,8 @@ public class DepartmentListController implements Initializable, DataChangeListen
 		List<Department> list = service.findAll();
 		obsList = FXCollections.observableArrayList(list);
 		tableViewDepartment.setItems(obsList);
-		initEditButtons(); // método do professor
-		initRemoveButtons(); // método do professor
+		initEditButtons(); 
+		initRemoveButtons(); 
 	}
 
 	private void createDialogForm(Department obj, String absoluteName, Stage parentStage) {
@@ -108,7 +108,7 @@ public class DepartmentListController implements Initializable, DataChangeListen
 			DepartmentFormController controller = loader.getController();
 			controller.setDepartmentService(new DepartmentServices());
 			controller.setDepartment(obj);
-			controller.subscribeDataChengeListener(this); // aqui é a tranformação da classe em um listener
+			controller.subscribeDataChangeListener(this); // aqui é a tranformação da classe em um listener
 			controller.updateFormDate();
 
 			Stage dialogForm = new Stage();
